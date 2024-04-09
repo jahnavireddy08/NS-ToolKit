@@ -1,19 +1,17 @@
 import socket
 
-def banner_grabber(target, port=22):
+def banner_grabber(target, port=80):
     try:
-        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        s.settimeout(5)
-        s.connect((target, port))
-        banner = s.recv(1024)
-        return banner.decode().strip()
+        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+            s.settimeout(5)
+            s.connect((target, port))
+            s.send(b"GET / HTTP/1.1\r\nHost: {}\r\n\r\n".format(target).encode())
+            banner = s.recv(1024)
+            return banner.decode().strip()
     except Exception as e:
         return str(e)
-    finally:
-        s.close()
 
 if __name__ == "__main__":
-    # url = input("Enter a url: ")
-    target = "128.199.26.61"
-    port = 22
-    print(f"banner from {target}:{port} - {banner_grabber(target, port)}")
+    target = input("Enter the target IP address or domain name: ")
+    port = int(input("Enter the port number (default is 80 for HTTP): ") or 80)
+    print(f"Banner from {target}:{port} - {banner_grabber(target, port)}")
