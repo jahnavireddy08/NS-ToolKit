@@ -1,12 +1,12 @@
-from scapy.all import *
+from scapy.all import sniff
 
-def packet(count):
-    pack = ""
-    packets = sniff(count = count)
+def packet_sniffer(count):
+    packets = sniff(count=count)
+    packet_data = ""
     for packet in packets:
-        pack += str(packet) + "\n"
-    return pack
+        packet_data += str(packet) + "\n"
+    return packet_data
 
 if __name__ == "__main__":
-
-    print(packet(5))
+    count = int(input("Enter the number of packets to sniff: "))
+    print(packet_sniffer(count))
