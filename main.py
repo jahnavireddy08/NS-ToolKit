@@ -65,7 +65,25 @@ class NetworkToolkitApp:
         except Exception as e:
             return str(e)
 
-    # Similar methods for other functionalities (geo location, nmap scan, packet sniffer, wifi scan) can be added
+    def create_geo_location_tab(self):
+        tab = ttk.Frame(self.notebook)
+        self.notebook.add(tab, text="Geo Location")
+        # Add widgets for geo location tab here
+
+    def create_nmap_scan_tab(self):
+        tab = ttk.Frame(self.notebook)
+        self.notebook.add(tab, text="Nmap Scan")
+        # Add widgets for nmap scan tab here
+
+    def create_packet_sniffer_tab(self):
+        tab = ttk.Frame(self.notebook)
+        self.notebook.add(tab, text="Packet Sniffer")
+        # Add widgets for packet sniffer tab here
+
+    def create_wifi_scan_tab(self):
+        tab = ttk.Frame(self.notebook)
+        self.notebook.add(tab, text="Wi-Fi Scan")
+        # Add widgets for wifi scan tab here
 
 if __name__ == "__main__":
     root = tk.Tk()
